@@ -16,16 +16,6 @@ from datetime import datetime
 
 
 class CoinTestCase(TestCase):
-	# @classmethod
-	# def setUpClass(self):
-	# 	#adds the test data 
-	# 	seed_data()
-	# 	run()
-	# 	super(CoinTestCase, self).setUpClass()
-
-
-		
-
 		
 
 	def test_coin_count(self):

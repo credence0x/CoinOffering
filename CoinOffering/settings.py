@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#ikwtw3)!zrwubbp__kv(0wg!z7s4sg6#nnck&!cn^ebziv5f-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["milliontoken.herokuapp.com","127.0.0.1"]
 
 LOGIN_URL = '/user/sign-in'
 # Application definition
