@@ -1,0 +1,86 @@
+{% extends 'Users/base.html' %}
+{% block content %}
+
+<style type="text/css">
+    .lorange{
+        color: orange;
+        /*font-weight: bold;*/
+        text-align: center;
+        font-size: 130%;
+    }
+    .lblue{
+        color: blue;
+        /*font-weight: bold;*/
+    }
+    .cover{
+        border-radius: 20px;
+        text-align: unset;
+        border-color: rgb(220,220,220);
+        box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    }
+</style>
+ <br>
+<div class="cover">
+<br><br>
+<div class="lorange lblue">Hello {{request.user.first_name}},</div>
+
+<br>
+<div class="lorange">Invest in Million Token Today</div>
+<br>
+{% if bid == False %}
+<div class="lorange">  You have no active bid. Kindly bid for one <a href="{% url 'Bid:create' %}">right here</a></div>
+
+{% else %}
+{% if bid.processed %}
+{% if bid.successful %}
+<div class="lorange"> Your bid was successful!!!
+<br><br><br>
+<div class="lblue">
+<div>number of tokens received: &emsp;&emsp;<span id="number_of_tokens_allotted">{{bid.successful.number_of_tokens_allotted}}</span></div><br>
+
+<div>number of tokens bid for: &emsp;&emsp;<span id="number_of_tokens">{{bid.number_of_tokens}}</span></div><br>
+<div>Price per token : &emsp;&emsp;<span id="price_per_token">{{bid.price_per_token}}</span></div><br>
+<div>Total Due : &emsp;&emsp;<span id="total_due">{{bid.successful.total_due}}</span></div>
+</div>
+</div>
+{% else %}
+<div class="lorange"> Sorry, your bid was unsuccessful</div><br><br><br>
+{% endif %}
+
+{% else %}
+<div class="lorange"> You have an active bid for MillionToken 
+<br><br><br>
+<div class="lblue" >
+<div>number of tokens bid for: &emsp;&emsp;<span id="number_of_tokens">{{bid.number_of_tokens}}</span></div><br>
+<div>Price per token : &emsp;&emsp;<span id="price_per_token">{{bid.price_per_token}}</span></div>
+</div>
+</div>
+{% endif %}
+<br><br><br>
+<div class="lorange"><a href="{% url 'Bid:delete' %}"><button>DELETE</button></a></div>
+
+{% endif %}
+<br>
+
+
+<br><br>
+<div class="lorange"><a href="{% url 'Users:log-out' %}"><button>LOG OUT</button></a></div>
+
+</div>
+<br><br><br><br><br><br>
+<script type="text/javascript">
+    function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+var list = [document.getElementById('total_due') || false,
+        document.getElementById('price_per_token') || false,
+        document.getElementById('number_of_tokens') || false,
+        document.getElementById('number_of_tokens_allotted') || false,
+        ]
+for (each in list){
+    if (each){
+        list[each].innerHTML = numberWithCommas(parseInt(list[each].innerHTML))
+    }
+}
+</script>
+{% endblock %}
