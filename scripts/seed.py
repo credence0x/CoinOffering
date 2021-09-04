@@ -20,15 +20,16 @@ def run(*args):
     else:
         admin = User.objects.get(username="lanre")
         
-        Coin.objects.create(creator=admin,
-            name="MillionToken",
-            number_available=22740,
-            end_bid_time = datetime.now())
-        
-        
+        if not Coin.objects.filter(name="MillionToken").exists():
+            Coin.objects.create(creator=admin,
+                name="MillionToken",
+                number_available=22740,
+                end_bid_time = datetime.now())
+            
+            
 
-        print("MillionToken created successfully")
-        
+            print("MillionToken created successfully")
+            
 
         customers = []
         ######## CREATE 20 USERS AND CUSTOMERS #######
